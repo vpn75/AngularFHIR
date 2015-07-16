@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+    <link href="bower/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower/css/cornerstone.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+    <script src="bower/js/angular-route.min.js"></script>
+    <script src="bower/js/angular-sanitize.min.js"></script>
+    <script src="bower/js/jquery.min.js"></script>
+    <script src="bower/js/bootstrap.min.js"></script>
+    <script src="bower/js/fhir_app.js"></script>   
+    <script src="bower/js/fhir_controller.js"></script>
+    <script src="bower/js/fhir_service.js"></script>
+
+<style>
+table {
+    border-collapse: collapse;
+    width: 30%;
+}
+table, th, td {
+    border: 1px solid black;
+}
+td, th {
+    padding: 5px;
+}
+th {
+    background-color: #337ab7;
+    color: white;
+}
+
+.selected {
+    background-color: #FFFFCC;
+    font-weight: bold;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+    display: none !important;
+}
+
+</style>
+
+</HEAD>
+<BODY>
+
+
+<div class="container" ng-app="FHIRapp">
+    <div class="row">
+        <div class="jumbotron">
+            <h2>FHIR/DICOMWeb Dev Project</h2>
+            Radiology EMR client based on FHIR and DICOMweb REST API's. 
+        </div>
+    </div>
+    <div id="main">
+        <ng-view></ng-view>
+    </div>
+
+</div>
+
+</BODY>
+</HTML>

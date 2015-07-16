@@ -1,0 +1,48 @@
+<div class="row" ng-controller="patientController">
+    <form id="searchForm" class="form-inline" role="form">
+        <button type="submit" class="btn btn-primary" ng-click="fetchPatients()">Search</button>
+            <div class="form-group">
+                <label for="inputName" class="">Name</label>
+                <input type="text" class="from-control" ng-model="familyname" placeholder="" value="SIIM">
+            </div>
+            <div class="form-group">
+                <label for="inputPatientId" class="">Patient ID</label>
+                <input type="text" class="from-control" ng-model="patientID" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputGender" class="">Gender</label>
+                <select class="form-control" ng-model="gender">
+                    <option></option>
+                    <option>M</option>
+                    <option>F</option>
+                </select>
+    </form>
+</div>
+    <p>        
+<div class="row">
+    <div id="links" class="row">
+        <span ng-repeat="nav in navlinks">
+            <button class='btn' ng-click="navSnapshot(nav.href)">{{nav.rel}}</button>
+        </span>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Patient Name</th>
+            <th>Patient ID</th>
+            <th>Gender</th>
+            <th>DOB</th>
+        </tr>
+        </thead>
+        <tbody id="patientList">
+            <tr ng-repeat="p in patients">
+                <td> <a href="#Reports/{{ parseName(p) }}">{{ displayfullName(p.content.name[0]) }}</td>
+                <td>{{p.content.identifier[0].value}}</a></td>
+                <td>{{p.content.gender.coding[0].display}}</td>
+                <td>{{p.content.birthDate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+        <div ng-show="patients">Total Results: {{ totalResults }}</div>
+        

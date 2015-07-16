@@ -1,0 +1,57 @@
+        <div class="row" ng-cloak>
+        <a href="#/Patients">Back to Patients</a>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title">
+                PATIENT DETAILS:
+                </h4>
+                </div>
+                <div class="panel-body">
+                    <span>
+                        <b>{{displayfullName(name)}}</b><br>
+                        MRN: {{mrn}}<br>
+                        Gender: {{gender}}<br>
+                        DOB: {{DOB}}
+                    </span>
+                </div>
+            </div>
+        </div>
+            <div id="links" class="row">
+                <span ng-repeat="nav in navlinks">
+                <button class='btn' ng-click="navSnapshot(nav.href)">{{nav.rel}}</button>
+                </span>
+            </div>
+            <br>
+            <div class="row"><span><i>Total results: </i>{{ totalResults }}</span>
+            
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Acc#</th>
+                    <th>Text</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="reportListTable">
+                <tr ng-class="($index == selectedRow) ? 'selected' : ''" ng-repeat="x in reports" ng-click="displayReport(x.content.text.div, x.content.name.text, x.content.identifier.value); setClickedRow($index) ">
+                <td>{{ x.content.issued }}</td>
+                <td><a href="/Study/{{ x.content.identifier.value }}">{{ x.content.identifier.value }}</a></td>
+                <td>{{ x.content.name.text }}</td>
+                <td>{{ x.content.status | uppercase}}</td>
+                </tbody>
+            </table>
+     </div>
+     <div class="row" ng-show="reportBody">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                Title: {{reportTitle | uppercase}}<br>
+                Accession: {{accession}}
+                </h4>
+                <h4 class="text-right"></h4>
+            </div>
+            <div class="panel-body" ng-bind-html="reportBody"></div>
+        </div>
+</div>
