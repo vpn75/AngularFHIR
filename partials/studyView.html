@@ -1,0 +1,66 @@
+        <div class="row" ng-cloak>
+        <a href="#/Patients">Back to Patients</a>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title">
+                PATIENT DETAILS:
+                </h4>
+                </div>
+                <div class="panel-body">
+                    <span>
+                        <b>{{displayfullName(name)}}</b><br>
+                        MRN: {{mrn}}<br>
+                        Gender: {{gender}}<br>
+                        DOB: {{DOB}}
+                    </span>
+                </div>
+            </div>
+        </div>
+            
+            <br>
+            
+            
+            </div>
+            <table class="table" ng-show="studydate">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Acc#</th>
+                    <th>Description</th>
+                    <th># of Series</th>
+                    <th>Images</th>
+                </tr>
+                </thead>
+                <tbody id="studyDetail">
+                <tr>
+                    <td>{{studydate}}</td>
+                    <td>{{accession}}</td>
+                    <td>{{studydescription}}</td>
+                    <td>{{totalseries}}</td>
+                    <td>{{totalimages}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table" ng-show="series">
+                <thead>
+                    <tr>
+                        <th>Series#</th>
+                        <th>Modality</th>
+                        <th>Description</th>
+                        <th>DateTime</th>
+                        <th># of Images</th>
+                    </tr>
+                </thead>
+                <tbody id="seriesDetail">
+                    <tr ng-repeat="s in series">
+                        <td>{{s.number}}</td>
+                        <td>{{s.modality}}</td>
+                        <td>{{s.description}}</td>
+                        <td>{{s.dateTime}}</td>
+                        <td>{{s.numberOfInstances}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+</div>

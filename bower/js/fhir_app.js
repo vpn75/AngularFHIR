@@ -16,5 +16,9 @@ config(['$routeProvider', function ($routeProvider) {
 				templateUrl: "partials/patients.html",
 				controller: "patientController"
 			}).
+		when("/Study/:id", {
+				templateUrl: "partials/studyView.html",
+				controller: "studyViewController"
+		}).
 		otherwise({redirectTo: "/Patients"});
 }]);

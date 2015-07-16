@@ -1,4 +1,4 @@
-        <div class="row" ng-cloak>
+        <div class="row" ng-show="name">
         <a href="#/Patients">Back to Patients</a>
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -37,7 +37,7 @@
                 <tbody id="reportListTable">
                 <tr ng-class="($index == selectedRow) ? 'selected' : ''" ng-repeat="x in reports" ng-click="displayReport(x.content.text.div, x.content.name.text, x.content.identifier.value); setClickedRow($index) ">
                 <td>{{ x.content.issued }}</td>
-                <td><a href="/Study/{{ x.content.identifier.value }}">{{ x.content.identifier.value }}</a></td>
+                <td><a href="#/Study/{{ x.content.identifier.value }}">{{ x.content.identifier.value }}</a></td>
                 <td>{{ x.content.name.text }}</td>
                 <td>{{ x.content.status | uppercase}}</td>
                 </tbody>
