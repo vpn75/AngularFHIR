@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+    <link href="bower/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower/css/cornerstone.css" rel="stylesheet">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+    <script src="bower/js/angular-route.min.js"></script>
+    <script src="bower/js/angular-sanitize.min.js"></script>
+    <script src="bower/js/jquery.min.js"></script>
+    <script src="bower/js/bootstrap.min.js"></script>
+    <script src="bower/js/fhir_app.js"></script>   
+    <script src="bower/js/fhir_controller.js"></script>
+    <script src="bower/js/fhir_service.js"></script>
+  
+<style>
+table {
+    border-collapse: collapse;
+    width: 30%;
+}
+table, th, td {
+    border: 1px solid black;
+}
+td, th {
+    padding: 5px;
+}
+th {
+    background-color: #337ab7;
+    color: white;
+}
+</style>
+
+</HEAD>
+<BODY>
+
+
+<div class="container" ng-app="FHIRapp" ng-controller="reportSelectController">
+    <div class="row">
+        <div class="jumbotron">
+            <h2>FHIR/DICOMWeb Dev Project</h2>
+            Radiology EMR client based on FHIR and DICOMweb REST API's.  Select a patient's reports based on type
+        </div>
+    </div>
+    <div id="main">
+        <div class="row">
+            <form id="searchForm" class="form-inline" role="form">
+            <button type="submit" class="btn btn-primary" ng-click="fetch()">Search</button>
+            <div class="form-group">
+                <label for="inputName">Name: </label>
+                <input type="text" class="form-control" id="inputName" placeholder="" value="" ng-model="name">
+            </div>
+            <div class="form-group">
+                <div class="dropdown">
+                    <select name="reportType" class="form-control" ng-model="reportType" ng-options="r.code as r.display for r in repCat">
+                        <option value="">-- Select ReportType --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="dropdown">
+                    <select class="form-control" ng-model="status">
+                        <option value=''>--Select Report Status--</option>
+                        <option value='final'>Final</option>
+                        <option value='partial'>Partial</option>
+                    </select>
+                </div>    
+            </div>
+            </form>
+        </div>
+        <div>
+        <p>
+        <div class="row">
+            <div id="links" class="row">
+                <span ng-repeat="nav in navlinks">
+                <button class='btn' ng-click="navSnapshot(nav.href)">{{nav.rel}}</button>
+                </span>
+            </div>
+            <br>
+            <div class="row"><span ng-show="(totalResults && !reportBody)"><i>Total results: </i>{{ totalResults }}</span>
+            <span class="text align-right" ng-show="reportBody"><a href="#" style="{color:white}" ng-click="reportBody=''">Back to results</a></span>
+            </div>
+            <table class="table" ng-hide="reportBody">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Acc#</th>
+                    <th>Text</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody id="reportListTable">
+                <tr ng-style="setStylebyStatus(x.content.status)" ng-repeat="x in reports">
+                <td>{{ x.content.subject.reference.split("/")[1] }}
+                <td>{{ x.content.issued }}</td>
+                <td>{{ x.content.identifier.value }}</td>
+                <td>{{ x.content.name.text }}</td>
+                <td><a href="#" ng-click="displayReport(x.content.text.div, x.content.name.text, x.content.identifier.value)" title="View Report">{{ x.content.status | uppercase}}</a></td>
+                </tbody>
+            </table>
+     </div>
+     <div class="row" ng-show="reportBody">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                Title: {{reportTitle}}<br>
+                Accession: {{accession}}
+                </h4>
+                <h4 class="text-right"></h4>
+            </div>
+            <div class="panel-body" ng-bind-html="reportBody"></div>
+        </div>
+</div>
+
+</BODY>
+</HTML>        
+                
